@@ -1,45 +1,84 @@
-Personalized Letter Generator
-This project creates invitation letters for many people using one letter and a list of names.
+# Personalized Letter Generator 📨
 
-How to Use
-Write your main letter and save it in:
-Input/Letters/starting_letter.txt
-→ Add [name] wherever you want the person's name to appear.
+This project helps you create personalized letters for many people using one template and a list of names.
 
-Add the names of people in this file:
-Input/Names/invited_names.txt
-→ Write one name per line.
+---
 
-Run the Python program.
+## 📄 What You Need
 
-After running, the final letters will be ready in this folder:
-output/ReadyTosend/
-→ Each file will look like: Letter_for_John.docx, Letter_for_Emma.docx, etc.
+1. A letter template file:  
+   `Input/Letters/starting_letter.txt`
 
-Example
-If your letter says:
+2. A list of names file:  
+   `Input/Names/invited_names.txt`
 
-Dear [name], you are invited...
+3. Python script (see below).
 
-And the names are:
+---
 
-John
+## ✍️ Example Content
 
-Emma
+### starting_letter.txt
+```
+Dear [name],
 
-Then it will create:
+You are invited to our special event this weekend. Please join us and make the occasion memorable.
 
-Letter_for_John.docx
+Best regards,  
+Team Organizers
+```
 
-Letter_for_Emma.docx
+### invited_names.txt
+```
+Sai
+Charn
+Riyaz
+Amigan
+```
 
-Helpful for
-Invitations
+---
 
-Thank-you letters
+## ▶️ Python Code
 
-Certificates
+```python
+PLACEHOLDER = '[name]'
 
-Custom messages for many people
+with open(r"Input/Names/invited_names.txt") as names_file:
+    names = names_file.readlines()
 
-That’s it! Just one template, many names, and all your letters are ready.
+with open(r'Input/Letters/starting_letter.txt') as letter_file:
+    letter_content = letter_file.read()
+
+    for name in names:
+        stripped_name = name.strip()
+        new_letter = letter_content.replace(PLACEHOLDER, stripped_name)
+        with open(f"./output/ReadyTosend/Letter_for_{stripped_name}.docx", mode='w') as completed_letter:
+            completed_letter.write(new_letter)
+```
+
+---
+
+## 📂 Output
+
+After running the script, you will get 4 files in the folder:  
+`output/ReadyTosend/`
+
+- Letter_for_Sai.docx  
+- Letter_for_Charn.docx  
+- Letter_for_Riyaz.docx  
+- Letter_for_Amigan.docx  
+
+Each letter will have the name filled in.
+
+---
+
+## ✅ Use Cases
+
+- Invitations for events  
+- School/college letters  
+- Personalized thank-you notes  
+- Certificate message generation  
+
+---
+
+Just write your letter once, add names, and get multiple custom letters automatically. 🚀
